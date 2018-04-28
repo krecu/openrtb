@@ -1,5 +1,23 @@
 package openrtb
 
+var (
+	DeviceBrowsCapMap = map[string]int{
+		"Console":DeviceTypeConnected,
+		"TV Device":DeviceTypeTV,
+		"Tablet":DeviceTypeTablet,
+		"Mobile Phone":DeviceTypeMobile,
+		"Smartphone":DeviceTypeMobile,
+		"Feature Phone":DeviceTypeMobile,
+		"Mobile Device":DeviceTypeMobile,
+		"FonePad":DeviceTypeTablet,
+		"Desktop":DeviceTypePC,
+		"Ebook Reader":DeviceTypeTablet,
+		"Car Entertainment System":DeviceTypeConnected,
+		"Digital Camera":DeviceTypeConnected,
+		"unknown":DeviceTypeUnknown,
+	}
+)
+
 // The "device" object provides information pertaining to the device including its hardware,
 // platform, location, and carrier. This device can refer to a mobile handset, a desktop computer,
 // set top box or other digital device.

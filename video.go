@@ -14,6 +14,32 @@ var (
 	ErrInvalidVideoNoProtocols   = errors.New("openrtb: video protocols missing")
 )
 
+var (
+	VideoPlacementMap = map[string]int{
+		"postroll":VideoPlacementInStream,
+		"pauseroll":VideoPlacementInStream,
+		"preroll":VideoPlacementInStream,
+		"overlay":VideoPlacementInterstitial,
+		"contentroll":VideoPlacementInArticle,
+		"slideroll":VideoPlacementInterstitial,
+		"flyroll":VideoPlacementInterstitial,
+	}
+	VideoLinearityMap = map[string]int{
+		"postroll":    VideoLinearityLinear,
+		"pauseroll":   VideoLinearityLinear,
+		"preroll":     VideoLinearityLinear,
+		"contentroll": VideoLinearityNonLinear,
+		"overlay":     VideoLinearityNonLinear,
+		"slideroll":   VideoLinearityNonLinear,
+		"flyroll":     VideoLinearityNonLinear,
+	}
+	VideoStartDelayMap = map[string]int{
+		"postroll":-2,
+		"pauseroll":-1,
+		"preroll":0,
+	}
+)
+
 // The "video" object must be included directly in the impression object if the impression offered
 // for auction is an in-stream video ad opportunity.
 type Video struct {

@@ -64,6 +64,22 @@ const (
 	VideoLinearityNonLinear = 2
 )
 
+const (
+	MimeVideoMp4 = "video/mp4"
+	MimeVideoMpg = "video/mpg"
+	MimeVideoWebm = "video/webm"
+	MimeVideoFlash = "application/x-shockwave-flash"
+	MimeVideoJavaScript = "application/javascript"
+)
+
+const (
+	VideoMaxDuration = 30
+	VideoMinDuration = 1
+	VideoMaxExtended = - 1
+	VideoHeight = 320
+	VideoWidth = 576
+)
+
 // 5.8 Video and Audio Bid Response Protocols
 const (
 	VideoProtoVAST1            = 1
@@ -147,6 +163,41 @@ const (
 	LocationTypeGPS  = 1
 	LocationTypeIP   = 2
 	LocationTypeUser = 3
+)
+
+const (
+	IpServicesMaxMind = 3
+	IpServicesIp2Location = 1
+	IpServicesNeuStar = 2
+	IpServicesNetAcuty = 2
+)
+
+const (
+	JsEnabled = 1
+	JsDisabled = 0
+)
+
+const (
+	InstlOk = 1;
+	InstlElse = 2;
+)
+
+const (
+	SecureOk = 1;
+	SecureNone = 2;
+	SecureNone_RTB_OLD = 0;
+)
+
+const (
+	OpenRTB_2_2 = "2_2";
+	OpenRTB_2_3 = "2_3";
+	OpenRTB_2_4 = "2_4";
+)
+
+const (
+	AuctionTypeFirstPrice = 1
+	AuctionTypeSecondPrice = 2
+	AuctionTypeFloorPrice = 3
 )
 
 // 5.17 Device Type
