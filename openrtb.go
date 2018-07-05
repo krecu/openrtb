@@ -73,7 +73,7 @@ const (
 )
 
 const (
-	VideoMaxDuration = 30
+	VideoMaxDuration = 120
 	VideoMinDuration = 1
 	VideoMaxExtended = - 1
 	VideoHeight = 320
