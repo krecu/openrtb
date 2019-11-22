@@ -6,6 +6,8 @@ import "errors"
 var (
 	ErrInvalidBidNoID    = errors.New("openrtb: bid is missing ID")
 	ErrInvalidBidNoImpID = errors.New("openrtb: bid is missing impression ID")
+	ErrInvalidBidPrice = errors.New("openrtb: bid is bad price")
+	ErrInvalidBidNotify = errors.New("openrtb: empty adm OR nurl")
 )
 
 // ID, ImpID and Price are required; all other optional.
@@ -51,6 +53,14 @@ func (bid *Bid) Validate() error {
 		return ErrInvalidBidNoID
 	} else if bid.ImpID == "" {
 		return ErrInvalidBidNoImpID
+	}
+
+	if bid.Price == 0 {
+		return ErrInvalidBidPrice
+	}
+
+	if bid.AdMarkup == "" && bid.NURL == "" {
+		return ErrInvalidBidNotify
 	}
 
 	return nil

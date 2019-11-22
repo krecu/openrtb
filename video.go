@@ -21,6 +21,7 @@ var (
 		"preroll":VideoPlacementInStream,
 		"overlay":VideoPlacementInterstitial,
 		"contentroll":VideoPlacementInArticle,
+		"continuousroll":VideoPlacementInArticle,
 		"slideroll":VideoPlacementInterstitial,
 		"flyroll":VideoPlacementInterstitial,
 	}
@@ -29,6 +30,7 @@ var (
 		"pauseroll":   VideoLinearityLinear,
 		"preroll":     VideoLinearityLinear,
 		"contentroll": VideoLinearityNonLinear,
+		"continuousroll": VideoLinearityNonLinear,
 		"overlay":     VideoLinearityNonLinear,
 		"slideroll":   VideoLinearityNonLinear,
 		"flyroll":     VideoLinearityNonLinear,
