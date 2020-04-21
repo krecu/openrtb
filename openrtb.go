@@ -310,6 +310,73 @@ type User struct {
 	Ext        Extension `json:"ext,omitempty"`
 }
 
+func (u *User) AddSegment(name string, val interface{}) {
+	if vals, ok := val.(map[string]interface{}); ok {
+
+		data := Data{
+			Name: name,
+		}
+
+		for key, val := range vals {
+			if _, ok := val.(string); ok {
+				data.Segment = append(data.Segment, Segment{
+					Name: key,
+					Value: val.(string),
+				})
+			}
+		}
+
+		u.Data = append(u.Data, data)
+	}
+}
+
+func (u *User) AddMatching(name string, val string) {
+
+	// def matchibg block
+	var mData = Data{
+		Name: "matching",
+	}
+
+	// find matchibg block
+	dExit := false
+	dIndex := 0
+	for i, d := range u.Data {
+		if d.Name == "matching" {
+			mData = d
+			dExit = true
+			dIndex = i
+			break
+		}
+	}
+
+	sExit := false
+	sIndex := 0
+	for i, s := range mData.Segment {
+		if s.Name == name {
+			sExit = true
+			sIndex = i
+			break
+		}
+	}
+
+	// if exit then update value
+	// else create value
+	if sExit {
+		mData.Segment[sIndex].Value = val
+	} else {
+		mData.Segment = append(mData.Segment, Segment{
+			Name: name,
+			Value: val,
+		})
+	}
+
+	if dExit {
+		u.Data[dIndex] = mData
+	} else {
+		u.Data = append(u.Data, mData)
+	}
+}
+
 // The data and segment objects together allow additional data about the user to be specified. This data
 // may be from multiple sources whether from the exchange itself or third party providers as specified by
 // the id field. A bid request can mix data objects from multiple providers. The specific data providers in

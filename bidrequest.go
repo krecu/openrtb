@@ -1,6 +1,8 @@
 package openrtb
 
-import "errors"
+import (
+	"errors"
+)
 
 // Validation errors
 var (
@@ -35,6 +37,76 @@ type BidRequest struct {
 	Ext         Extension    `json:"ext,omitempty"`
 
 	Pmp *Pmp `json:"pmp,omitempty"` // DEPRECATED: kept for backwards compatibility
+}
+
+func (req *BidRequest) Copy() *BidRequest {
+	cp := &BidRequest{
+		ID: req.ID,
+		Test: req.Test,
+		AuctionType: req.AuctionType,
+		TMax: req.TMax,
+		AllImps: req.AllImps,
+		Ext: req.Ext,
+	}
+
+	if req.Site != nil {
+		cp.Site = &Site{}
+		*cp.Site = *req.Site
+	}
+	if req.App != nil {
+		cp.App = &App{}
+		*cp.App = *req.App
+	}
+	if req.Device != nil {
+		cp.Device = &Device{}
+		*cp.Device = *req.Device
+	}
+	if req.User != nil {
+		cp.User = &User{}
+		*cp.User = *req.User
+	}
+	if req.Source != nil {
+		cp.Source = &Source{}
+		*cp.Source = *req.Source
+	}
+	if req.Regs != nil {
+		cp.Regs = &Regulations{}
+		*cp.Regs = *req.Regs
+	}
+	if req.Pmp != nil {
+		cp.Pmp = &Pmp{}
+		*cp.Pmp = *req.Pmp
+		if len(req.Pmp.Deals) > 0 {
+			cp.Pmp.Deals = make([]Deal, len(req.Pmp.Deals))
+			copy(cp.Pmp.Deals, req.Pmp.Deals)
+		}
+	}
+
+	cp.Imp = make([]Impression, len(req.Imp))
+	copy(cp.Imp, req.Imp)
+
+	cp.WSeat = make([]string, len(req.WSeat))
+	copy(cp.WSeat, req.WSeat)
+
+	cp.BSeat = make([]string, len(req.BSeat))
+	copy(cp.BSeat, req.BSeat)
+
+	cp.WLang = make([]string, len(req.WLang))
+	copy(cp.WLang, req.WLang)
+
+	cp.Cur = make([]string, len(req.Cur))
+	copy(cp.Cur, req.Cur)
+
+	cp.Bcat = make([]string, len(req.Bcat))
+	copy(cp.Bcat, req.Bcat)
+
+	cp.BAdv = make([]string, len(req.BAdv))
+	copy(cp.BAdv, req.BAdv)
+
+	cp.BApp = make([]string, len(req.BApp))
+	copy(cp.BApp, req.BApp)
+
+	return cp
 }
 
 // Validates the request
