@@ -68,6 +68,7 @@ const (
 	MimeVideoMp4 = "video/mp4"
 	MimeVideoMpg = "video/mpg"
 	MimeVideoWebm = "video/webm"
+	MimeVideoMov = "video/quicktime"
 	MimeVideoFlash = "application/x-shockwave-flash"
 	MimeJavaScript = "application/javascript"
 	MimeBannerJpeg = "image/jpeg"

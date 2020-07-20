@@ -33,6 +33,18 @@ type App struct {
 	Paid     int    `json:"paid,omitempty"`     // "1": Paid, "2": Free
 }
 
+func (a *App) ExistCat(cat string) bool {
+	if len(a.Cat) > 0 {
+		for _, c := range a.Cat {
+			if c == cat {
+				return true
+			}
+		}
+	}
+
+	return false
+}
+
 // A site object should be included if the ad supported content is part of a website (as opposed to
 // an application).  A bid request must not contain both a site object and an app object.
 type Site struct {
