@@ -65,25 +65,25 @@ const (
 )
 
 const (
-	MimeVideoMp4 = "video/mp4"
-	MimeVideoMpg = "video/mpg"
-	MimeVideoWebm = "video/webm"
-	MimeVideoMov = "video/quicktime"
+	MimeVideoMp4   = "video/mp4"
+	MimeVideoMpg   = "video/mpg"
+	MimeVideoWebm  = "video/webm"
+	MimeVideoMov   = "video/quicktime"
 	MimeVideoFlash = "application/x-shockwave-flash"
 	MimeJavaScript = "application/javascript"
 	MimeBannerJpeg = "image/jpeg"
-	MimeBannerJpg = "image/jpg"
-	MimeBannerGif = "image/gif"
-	MimeBannerPng = "image/png"
+	MimeBannerJpg  = "image/jpg"
+	MimeBannerGif  = "image/gif"
+	MimeBannerPng  = "image/png"
 	MimeBannerHtml = "text/html"
 )
 
 const (
 	VideoMaxDuration = 120
 	VideoMinDuration = 1
-	VideoMaxExtended = - 1
-	VideoHeight = 320
-	VideoWidth = 576
+	VideoMaxExtended = -1
+	VideoHeight      = 320
+	VideoWidth       = 576
 )
 
 // 5.8 Video and Audio Bid Response Protocols
@@ -172,38 +172,38 @@ const (
 )
 
 const (
-	IpServicesMaxMind = 3
+	IpServicesMaxMind     = 3
 	IpServicesIp2Location = 1
-	IpServicesNeuStar = 2
-	IpServicesNetAcuty = 2
+	IpServicesNeuStar     = 2
+	IpServicesNetAcuty    = 2
 )
 
 const (
-	JsEnabled = 1
+	JsEnabled  = 1
 	JsDisabled = 0
 )
 
 const (
-	InstlOk = 1;
-	InstlElse = 2;
+	InstlOk   = 1
+	InstlElse = 2
 )
 
 const (
-	SecureOk = 1;
-	SecureNone = 2;
-	SecureNone_RTB_OLD = 0;
+	SecureOk           = 1
+	SecureNone         = 2
+	SecureNone_RTB_OLD = 0
 )
 
 const (
-	OpenRTB_2_2 = "2_2";
-	OpenRTB_2_3 = "2_3";
-	OpenRTB_2_4 = "2_4";
+	OpenRTB_2_2 = "2_2"
+	OpenRTB_2_3 = "2_3"
+	OpenRTB_2_4 = "2_4"
 )
 
 const (
-	AuctionTypeFirstPrice = 1
+	AuctionTypeFirstPrice  = 1
 	AuctionTypeSecondPrice = 2
-	AuctionTypeFloorPrice = 3
+	AuctionTypeFloorPrice  = 3
 )
 
 // 5.17 Device Type
@@ -241,6 +241,63 @@ const (
 	NBRBlockedSite       = 7
 	NBRUnmatchedUser     = 8
 )
+
+type AdSize struct {
+	Width      int
+	Height     int
+	Resolution int
+}
+
+var DefaultAdSize []AdSize = []AdSize{
+	AdSize{
+		Width:      426,
+		Height:     240,
+		Resolution: 240,
+	},
+	AdSize{
+		Width:      640,
+		Height:     360,
+		Resolution: 360,
+	},
+	AdSize{
+		Width:      854,
+		Height:     480,
+		Resolution: 480,
+	},
+	AdSize{
+		Width:      1280,
+		Height:     720,
+		Resolution: 720,
+	},
+	AdSize{
+		Width:      1920,
+		Height:     1080,
+		Resolution: 1080,
+	},
+	AdSize{
+		Width:      2560,
+		Height:     1440,
+		Resolution: 1440,
+	},
+	AdSize{
+		Width:      3840,
+		Height:     2160,
+		Resolution: 2160,
+	},
+}
+
+func BestAdSize(w int, h int) AdSize {
+	for _, s := range DefaultAdSize {
+		if w*100/s.Width >= 50 && h*100/s.Height >= 50 {
+			return s
+		}
+	}
+	return AdSize{
+		Width:      VideoWidth,
+		Height:     VideoHeight,
+		Resolution: 240,
+	}
+}
 
 /*************************************************************************
  * COMMON OBJECT STRUCTS
@@ -321,7 +378,7 @@ func (u *User) AddSegment(name string, val interface{}) {
 		for key, val := range vals {
 			if _, ok := val.(string); ok {
 				data.Segment = append(data.Segment, Segment{
-					Name: key,
+					Name:  key,
 					Value: val.(string),
 				})
 			}
@@ -366,7 +423,7 @@ func (u *User) AddMatching(name string, val string) {
 		mData.Segment[sIndex].Value = val
 	} else {
 		mData.Segment = append(mData.Segment, Segment{
-			Name: name,
+			Name:  name,
 			Value: val,
 		})
 	}
