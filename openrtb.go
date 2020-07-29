@@ -250,6 +250,12 @@ type AdSize struct {
 	Resolution int
 }
 
+var SmartTvVideoAdSize = AdSize{
+	Width:      1920,
+	Height:     1080,
+	Resolution: 1080,
+}
+
 var DefaultVideoAdSize []AdSize = []AdSize{
 	AdSize{
 		Width:      426,
