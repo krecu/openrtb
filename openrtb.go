@@ -82,8 +82,10 @@ const (
 	VideoMaxDuration = 120
 	VideoMinDuration = 1
 	VideoMaxExtended = -1
-	VideoHeight      = 320
-	VideoWidth       = 576
+	VideoHeight      = 240
+	VideoWidth       = 426
+	BannerHeight     = 250
+	BannerWidth      = 300
 )
 
 // 5.8 Video and Audio Bid Response Protocols
@@ -248,7 +250,7 @@ type AdSize struct {
 	Resolution int
 }
 
-var DefaultAdSize []AdSize = []AdSize{
+var DefaultVideoAdSize []AdSize = []AdSize{
 	AdSize{
 		Width:      426,
 		Height:     240,
@@ -286,8 +288,31 @@ var DefaultAdSize []AdSize = []AdSize{
 	},
 }
 
-func BestAdSize(w int, h int) AdSize {
-	for _, s := range DefaultAdSize {
+var DefaultBannerAdSize []AdSize = []AdSize{
+	AdSize{
+		Width:  468,
+		Height: 60,
+	},
+	AdSize{
+		Width:  728,
+		Height: 90,
+	},
+	AdSize{
+		Width:  336,
+		Height: 280,
+	},
+	AdSize{
+		Width:  300,
+		Height: 250,
+	},
+	AdSize{
+		Width:  250,
+		Height: 250,
+	},
+}
+
+func BestVideoAdSize(w int, h int) AdSize {
+	for _, s := range DefaultVideoAdSize {
 		if w*100/s.Width >= 50 && h*100/s.Height >= 50 {
 			return s
 		}
@@ -295,6 +320,19 @@ func BestAdSize(w int, h int) AdSize {
 	return AdSize{
 		Width:      VideoWidth,
 		Height:     VideoHeight,
+		Resolution: 240,
+	}
+}
+
+func BestBannerAdSize(w int, h int) AdSize {
+	for _, s := range DefaultBannerAdSize {
+		if w*100/s.Width >= 50 && h*100/s.Height >= 50 {
+			return s
+		}
+	}
+	return AdSize{
+		Width:      BannerWidth,
+		Height:     BannerHeight,
 		Resolution: 240,
 	}
 }
