@@ -318,9 +318,11 @@ var DefaultBannerAdSize []AdSize = []AdSize{
 }
 
 func BestVideoAdSize(w int, h int) AdSize {
-	for _, s := range DefaultVideoAdSize {
-		if w*100/s.Width >= 50 && h*100/s.Height >= 50 {
-			return s
+	if w != 0 && h != 0 {
+		for _, s := range DefaultVideoAdSize {
+			if s.Width*100/w >= 80 && s.Height*100/h >= 80 {
+				return s
+			}
 		}
 	}
 	return AdSize{
@@ -331,9 +333,11 @@ func BestVideoAdSize(w int, h int) AdSize {
 }
 
 func BestBannerAdSize(w int, h int) AdSize {
-	for _, s := range DefaultBannerAdSize {
-		if w*100/s.Width >= 50 && h*100/s.Height >= 50 {
-			return s
+	if w != 0 && h != 0 {
+		for _, s := range DefaultBannerAdSize {
+			if s.Width*100/w >= 80 && s.Height*100/h >= 80 {
+				return s
+			}
 		}
 	}
 	return AdSize{
